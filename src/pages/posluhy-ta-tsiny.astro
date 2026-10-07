@@ -1,0 +1,141 @@
+---
+import Page from '../layouts/Page.astro';
+import Callout from '../components/Callout.astro';
+import Stub from '../components/Stub.astro';
+import { site } from '../data/site';
+import { pages } from '../data/pages';
+
+const { prices, terms, executor } = site;
+---
+
+<Page
+  page="pricing"
+  title="Послуги та ціни — допомога з підготовкою заяви до Реєстру збитків"
+  description="Що входить у супровід «Центру репараційної допомоги», скільки він коштує, чого ми не робимо і як подати заяву до Реєстру збитків безкоштовно без нас."
+  eyebrow="Наш супровід"
+  h1="Послуги та ціни"
+  lead="Ми — приватний сервіс. Допомагаємо розібратися з категоріями та документами і підготувати заяву. Подаєте її ви самі, а саме подання до Реєстру безкоштовне."
+  related={['howto', 'faq', 'contacts']}
+>
+  <h2 id="shcho-robymo">Що ми робимо</h2>
+  <ol class="steplist">
+    <li>
+      <h3>Розбираємо ситуацію</h3>
+      <p>Уточнюємо деталі, відповідаємо на запитання та визначаємо, які категорії заяв вам підходять.</p>
+    </li>
+    <li>
+      <h3>Готуємо документи</h3>
+      <p>Допомагаємо зібрати та підготувати необхідні документи і докази.</p>
+    </li>
+    <li>
+      <h3>Супроводжуємо подання</h3>
+      <p>Пояснюємо, як подати заяву в Дії, і залишаємося на зв’язку, поки ви подаєте її самі.</p>
+    </li>
+  </ol>
+  <p>
+    Зараз працюємо з категоріями{' '}
+    <a href={pages.a33.path}>A3.3 «Втрата житла або місця проживання»</a> та{' '}
+    <a href={pages.a36.path}>A3.6 «Втрата доступу або контролю над майном на ТОТ»</a>.
+  </p>
+
+  <h2 id="ne-robymo">Чого ми не робимо</h2>
+  <ul>
+    <li>Не подаємо заяву замість вас — це робите ви у своєму кабінеті громадянина в Дії.</li>
+    <li>Не просимо паролі, ключі електронного підпису чи банківські коди.</li>
+    <li>Не гарантуємо, що заяву внесуть до Реєстру: це вирішує Рада Реєстру.</li>
+    <li>Не обіцяємо виплат, сум чи строків і не «прискорюємо» розгляд заяви.</li>
+    <li>Не є державним органом, представником чи офіційним партнером Реєстру, Ради Європи або Дії.</li>
+  </ul>
+
+  <h2 id="tsiny">Ціни</h2>
+  <ul class="prices">
+    {
+      prices.map((item) => (
+        <li>
+          <div>
+            <p class="prices__title">{item.title}</p>
+            <p class="prices__note">
+              <Stub value={item.note} />
+            </p>
+          </div>
+          <p class="prices__price">
+            <Stub value={item.price} />
+          </p>
+        </li>
+      ))
+    }
+  </ul>
+  <p>Вартість називаємо до початку роботи. Оплачується наш супровід, а не подання заяви.</p>
+
+  <h2 id="umovy">Умови співпраці</h2>
+  <ul>
+    <li>Оформлення: <Stub value={terms.contract} /></li>
+    <li>Оплата: <Stub value={terms.payment} /></li>
+    <li>Виконавець: <Stub value={executor.legalName} />. <a href={pages.contacts.path}>Реквізити і контакти</a></li>
+  </ul>
+
+  <Callout title="Можна без нас і безкоштовно">
+    <p>
+      Заяву до Реєстру можна подати самостійно через Дію — ось <a href={pages.howto.path}>покрокова інструкція</a>.
+      Безкоштовно консультує й державна система надання безоплатної правничої допомоги:{' '}
+      <a href={site.freeLegalAidPhone.href}><strong>{site.freeLegalAidPhone.display}</strong></a>.
+    </p>
+  </Callout>
+</Page>
+
+<style>
+  .prices {
+    display: grid;
+    margin-block: 20px 16px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--white);
+    box-shadow: var(--shadow);
+  }
+
+  .prices li {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px 24px;
+    padding: 20px 24px;
+  }
+
+  .prices li + li {
+    border-block-start: 1px solid var(--line);
+  }
+
+  .prices p {
+    margin: 0;
+  }
+
+  .prices__title {
+    color: var(--navy);
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  .prices__note {
+    margin-block-start: 6px !important;
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.45;
+  }
+
+  .prices__price {
+    flex: none;
+    color: var(--blue);
+    font-weight: 800;
+    text-align: end;
+  }
+
+  @media (max-width: 559px) {
+    .prices li {
+      flex-direction: column;
+    }
+
+    .prices__price {
+      text-align: start;
+    }
+  }
+</style>

@@ -1,0 +1,44 @@
+---
+// Хлібні крихти. Розмітку BreadcrumbList для тієї самої сторінки додає
+// layouts/Base.astro (data/schema.ts) — видиме і розмічене збігаються.
+import { pages, type PageKey } from '../data/pages';
+
+interface Props {
+  page: PageKey;
+}
+
+const { page } = Astro.props;
+---
+
+<nav class="crumbs" aria-label="Хлібні крихти">
+  <ol>
+    <li><a href={pages.home.path}>{pages.home.label}</a></li>
+    <li aria-current="page">{pages[page].label}</li>
+  </ol>
+</nav>
+
+<style>
+  .crumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 10px;
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .crumbs li + li::before {
+    content: '/';
+    margin-inline-end: 10px;
+    color: var(--sky-200);
+  }
+
+  .crumbs a {
+    color: var(--blue);
+    text-decoration: none;
+  }
+
+  .crumbs a:hover {
+    text-decoration: underline;
+  }
+</style>

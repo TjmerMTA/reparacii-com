@@ -1,0 +1,26 @@
+---
+import Page from '../layouts/Page.astro';
+import Faq from '../components/Faq.astro';
+import Sources from '../components/Sources.astro';
+import { pages } from '../data/pages';
+import { faq } from '../data/faq';
+import { faqPage } from '../data/schema';
+import { src } from '../data/sources';
+---
+
+<Page
+  page="faq"
+  title="Питання та відповіді про заяву до Реєстру збитків"
+  description="Відповіді на поширені питання про заяву до Міжнародного реєстру збитків: чи платне подання, чи є строки, коли будуть виплати, хто ухвалює рішення і чим допомагає наш сервіс."
+  eyebrow="Питання та відповіді"
+  h1="Питання та відповіді про заяву до Реєстру збитків"
+  lead="Відповіді про Реєстр і подання складено за офіційними роз’ясненнями Реєстру та порталу Дія. Про строки і суми виплат відповідаємо чесно: їх наразі не знає ніхто."
+  schema={[faqPage(pages.faq, faq)]}
+  related={['howto', 'registry', 'pricing']}
+>
+  <Faq groups={faq} />
+
+  <Sources
+    items={[src.rdFaq, src.rdSubmit, src.rdProcessing, src.rdA33, src.rdA36, src.rdA33Disclaimer, src.rdLegalAid, src.diiaA33]}
+  />
+</Page>

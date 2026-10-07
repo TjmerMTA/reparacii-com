@@ -3,6 +3,7 @@
 // їх не дозволено використовувати в комерційних цілях. Лише текст і посилання.
 import Icon from './Icon.astro';
 import { site } from '../data/site';
+import { pages } from '../data/pages';
 ---
 
 <section class="section" id="reiestr" aria-labelledby="reiestr-title">
@@ -13,8 +14,8 @@ import { site } from '../data/site';
 
       <div class="registry__source">
         <p>
-          Реєстр діє при Раді Європи. Ми з ним не пов’язані, не представляємо його і не використовуємо
-          його символіку.
+          Реєстр створено під егідою Ради Європи. Ми з ним не пов’язані, не представляємо його і не
+          використовуємо його символіку.
         </p>
         <p>
           Офіційна інформація — лише на сайті Реєстру:{' '}
@@ -39,7 +40,14 @@ import { site } from '../data/site';
       </p>
       <p>
         Реєстр не є судом, трибуналом, компенсаційною комісією чи компенсаційним фондом і виплат не
-        призначає. Компенсаційну комісію ще не сформовано.
+        призначає. Розглядати заяви по суті буде майбутня Міжнародна компенсаційна комісія — коли розпочне
+        роботу.
+      </p>
+      <p>
+        <a class="arrow-link" href={pages.registry.path}>
+          Докладніше про Реєстр
+          <Icon name="arrow" size={20} />
+        </a>
       </p>
 
       <a class="registry__official" href={site.links.rd4u} target="_blank" rel="noopener noreferrer">
@@ -51,8 +59,8 @@ import { site } from '../data/site';
       <p class="registry__warning">
         <span class="registry__warning-icon"><Icon name="alert" size={20} /></span>
         <span>
-          Внесення заяви до Реєстру не гарантує виплату компенсації. Суми та строки виплат наразі
-          невідомі.
+          Внесення заяви до Реєстру не гарантує виплату компенсації. Строки спрогнозувати неможливо —
+          про це попереджає сам Реєстр.
         </span>
       </p>
     </div>

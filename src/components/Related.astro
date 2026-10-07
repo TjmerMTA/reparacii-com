@@ -1,0 +1,70 @@
+---
+import Icon from './Icon.astro';
+import { pages, type PageKey } from '../data/pages';
+
+interface Props {
+  keys: PageKey[];
+  title?: string;
+}
+
+const { keys, title = 'Читайте також' } = Astro.props;
+---
+
+<section class="section section--tint related" aria-labelledby="related-title">
+  <div class="container">
+    <h2 id="related-title" data-reveal>{title}</h2>
+    <ul class="related__list">
+      {
+        keys.map((key) => (
+          <li class="card card--hover related__card" data-reveal>
+            <h3>{pages[key].title}</h3>
+            <p>{pages[key].teaser}</p>
+            <a class="arrow-link" href={pages[key].path}>
+              Детальніше{' '}
+              <span class="visually-hidden">: {pages[key].title}</span>
+              <Icon name="arrow" size={20} />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .related {
+    padding-block: clamp(56px, 7vw, 88px);
+  }
+
+  .related__list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    margin-block-start: 32px;
+  }
+
+  .related__card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: clamp(20px, 2.4vw, 28px);
+  }
+
+  .related__card p {
+    color: var(--muted);
+    font-size: 16px;
+  }
+
+  .related__card .arrow-link {
+    align-self: flex-start;
+    margin-block-start: auto;
+    padding-block-start: 12px;
+    font-size: 16px;
+  }
+
+  @media (max-width: 1023px) {
+    .related__list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

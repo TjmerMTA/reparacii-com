@@ -1,0 +1,78 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  kind?: 'info' | 'warn';
+  title?: string;
+}
+
+const { kind = 'info', title } = Astro.props;
+---
+
+<aside class:list={['callout', `callout--${kind}`]}>
+  <span class="callout__icon"><Icon name={kind === 'warn' ? 'alert' : 'info'} size={22} /></span>
+  <div class="callout__body">
+    {title && <p class="callout__title">{title}</p>}
+    <slot />
+  </div>
+</aside>
+
+<style>
+  .callout {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-block: 28px;
+    padding: 18px 22px;
+    border-radius: var(--radius-sm);
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .callout--info {
+    border: 1px solid var(--line);
+    border-inline-start: 4px solid var(--blue);
+    background: var(--sky-50);
+  }
+
+  .callout--warn {
+    background: var(--yellow-soft);
+    color: #3d2f05;
+  }
+
+  .callout__icon {
+    flex: none;
+    margin-block-start: 1px;
+    color: var(--blue);
+  }
+
+  .callout--warn .callout__icon {
+    display: grid;
+    place-items: center;
+    inline-size: 30px;
+    block-size: 30px;
+    margin-block-start: -3px;
+    border-radius: 50%;
+    background: var(--yellow);
+    color: var(--white);
+  }
+
+  .callout--warn .callout__icon :global(svg) {
+    stroke-width: 2.6;
+  }
+
+  .callout__body {
+    display: grid;
+    gap: 8px;
+    min-inline-size: 0;
+  }
+
+  .callout__title {
+    color: var(--navy);
+    font-weight: 800;
+  }
+
+  .callout--warn .callout__title {
+    color: inherit;
+  }
+</style>

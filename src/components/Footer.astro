@@ -1,7 +1,8 @@
 ---
 import Logo from './Logo.astro';
 import Stub from './Stub.astro';
-import { site, nav } from '../data/site';
+import { site } from '../data/site';
+import { pages, footerNav } from '../data/pages';
 
 const { executor, contacts } = site;
 const year = new Date().getFullYear();
@@ -10,25 +11,30 @@ const year = new Date().getFullYear();
 <footer class="footer">
   <div class="container">
     <div class="footer__top">
-      <Logo />
+      <div class="footer__brand">
+        <Logo />
+        <p class="footer__disclaimer">
+          Незалежний приватний сервіс. Не є державним органом, представником Міжнародного реєстру збитків,
+          Ради Європи чи Дії. Подання заяви до Реєстру безоплатне — оплачуються лише наші послуги супроводу.
+          Внесення заяви до Реєстру не гарантує виплату компенсації.
+        </p>
+      </div>
 
-      <p class="footer__disclaimer">
-        Незалежний приватний сервіс. Не є державним органом, представником Міжнародного реєстру збитків,
-        Ради Європи чи Дії. Подання заяви до Реєстру безоплатне — оплачуються лише наші послуги супроводу.
-        Внесення заяви до Реєстру не гарантує виплату компенсації.
-      </p>
-
-      <nav aria-label="Меню в підвалі">
-        <ul class="footer__nav">
-          {
-            nav.map((item) => (
-              <li>
-                <a href={item.href}>{item.label}</a>
-              </li>
-            ))
-          }
-          <li><a href={site.links.privacy}>Політика конфіденційності</a></li>
-        </ul>
+      <nav class="footer__nav" aria-label="Меню в підвалі">
+        {
+          footerNav.map((group) => (
+            <div>
+              <p class="footer__title">{group.title}</p>
+              <ul>
+                {group.items.map((key) => (
+                  <li>
+                    <a href={pages[key].path}>{pages[key].label}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
       </nav>
     </div>
 
@@ -50,7 +56,7 @@ const year = new Date().getFullYear();
 
 <style>
   .footer {
-    padding-block: 40px 32px;
+    padding-block: 48px 32px;
     border-block-start: 1px solid var(--line);
     background: var(--white);
     color: var(--muted);
@@ -60,27 +66,39 @@ const year = new Date().getFullYear();
 
   .footer__top {
     display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
-    gap: 24px clamp(24px, 4vw, 48px);
-    align-items: center;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+    gap: 32px clamp(32px, 6vw, 88px);
+    align-items: start;
   }
 
   .footer__disclaimer {
-    padding-inline-start: clamp(16px, 3vw, 32px);
-    border-inline-start: 1px solid var(--line);
-    max-inline-size: 64ch;
+    margin-block-start: 20px;
+    max-inline-size: 48ch;
   }
 
   .footer__nav {
     display: grid;
-    grid-template-columns: repeat(2, auto);
-    gap: 8px 28px;
-    padding-inline-start: clamp(16px, 3vw, 32px);
-    border-inline-start: 1px solid var(--line);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px 24px;
+  }
+
+  .footer__title {
+    margin-block-end: 12px;
+    color: var(--navy);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .footer__nav ul {
+    display: grid;
+    gap: 10px;
   }
 
   .footer__nav a {
     color: var(--ink);
+    font-size: 15px;
     font-weight: 600;
     text-decoration: none;
   }
@@ -92,7 +110,7 @@ const year = new Date().getFullYear();
   .footer__bottom {
     display: grid;
     gap: 10px;
-    margin-block-start: 32px;
+    margin-block-start: 36px;
     padding-block-start: 24px;
     border-block-start: 1px solid var(--line);
   }
@@ -106,18 +124,15 @@ const year = new Date().getFullYear();
   @media (max-width: 1023px) {
     .footer__top {
       grid-template-columns: 1fr;
-      align-items: start;
     }
+  }
 
-    .footer__disclaimer,
-    .footer__nav {
-      padding-inline-start: 0;
-      border-inline-start: 0;
-    }
-
+  @media (max-width: 559px) {
     .footer__nav {
       grid-template-columns: 1fr;
-      gap: 12px;
+    }
+
+    .footer__nav a {
       font-size: 16px;
     }
   }

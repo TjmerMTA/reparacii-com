@@ -1,9 +1,20 @@
 ---
 import Icon from './Icon.astro';
 import { site } from '../data/site';
+
+interface Props {
+  /** Без верхнього відступу — коли блок іде одразу за білою секцією (головна). */
+  flush?: boolean;
+}
+
+const { flush = false } = Astro.props;
 ---
 
-<section class="section consult-section" id="konsultatsiia" aria-labelledby="konsultatsiia-title">
+<section
+  class:list={['section', { 'consult-section--flush': flush }]}
+  id="konsultatsiia"
+  aria-labelledby="konsultatsiia-title"
+>
   <div class="container">
     <div class="consult" data-reveal>
       <div class="consult__text">
@@ -134,7 +145,7 @@ import { site } from '../data/site';
 </script>
 
 <style>
-  .consult-section {
+  .consult-section--flush {
     padding-block-start: 0;
   }
 

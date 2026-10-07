@@ -1,0 +1,117 @@
+---
+import Page from '../layouts/Page.astro';
+import Callout from '../components/Callout.astro';
+import Stub from '../components/Stub.astro';
+import { site } from '../data/site';
+import { pages } from '../data/pages';
+
+const { executor, contacts } = site;
+---
+
+<Page
+  page="contacts"
+  title="Контакти — Центр репараційної допомоги"
+  description="Контакти приватного сервісу «Центр репараційної допомоги»: як зв’язатися, хто надає послугу, форма для безкоштовної консультації."
+  h1="Контакти"
+  lead="Найпростіше — залишити контакт у формі нижче: ми відповімо і домовимося про безкоштовну консультацію."
+  pageType="ContactPage"
+  related={['pricing', 'howto', 'faq']}
+  aside={false}
+>
+  <h2 id="zviazok">Як зв’язатися</h2>
+  <dl class="contacts">
+    <div>
+      <dt>Телефон</dt>
+      <dd><Stub value={contacts.phone} /></dd>
+    </div>
+    <div>
+      <dt>E-mail</dt>
+      <dd><Stub value={contacts.email} /></dd>
+    </div>
+    <div>
+      <dt>Telegram</dt>
+      <dd><Stub value={contacts.telegram} /></dd>
+    </div>
+    <div>
+      <dt>Години роботи</dt>
+      <dd><Stub value={contacts.hours} /></dd>
+    </div>
+  </dl>
+  <p><a class="arrow-link" href="#konsultatsiia">Перейти до форми консультації</a></p>
+
+  <h2 id="vykonavets">Хто надає послугу</h2>
+  <dl class="contacts">
+    <div>
+      <dt>Виконавець</dt>
+      <dd><Stub value={executor.legalName} /></dd>
+    </div>
+    <div>
+      <dt>Код</dt>
+      <dd><Stub value={executor.code} /></dd>
+    </div>
+    <div>
+      <dt>Адреса</dt>
+      <dd><Stub value={executor.address} /></dd>
+    </div>
+  </dl>
+
+  <Callout title="Ми — приватний сервіс">
+    <p>
+      «{site.name}» не є державним органом, Міжнародним реєстром збитків, Радою Європи чи Дією. Звернення до
+      Реєстру через нас не подаються: заяву ви подаєте самі в Дії.{' '}
+      <a href={pages.howto.path}>Як подати заяву самостійно</a>
+    </p>
+  </Callout>
+
+  <Callout kind="warn" title="Не надсилайте документи і ключі">
+    <p>
+      У повідомленнях і через форму не надсилайте документи, паролі, ключі електронного підпису чи банківські
+      коди. Ми їх ніколи не просимо. <a href={pages.privacy.path}>Політика конфіденційності</a>
+    </p>
+  </Callout>
+</Page>
+
+<style>
+  .contacts {
+    display: grid;
+    margin-block: 16px 24px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--white);
+    box-shadow: var(--shadow);
+  }
+
+  .contacts div {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px 24px;
+    padding: 16px 24px;
+  }
+
+  .contacts div + div {
+    border-block-start: 1px solid var(--line);
+  }
+
+  .contacts dt {
+    flex: none;
+    color: var(--muted);
+    font-size: 16px;
+  }
+
+  .contacts dd {
+    color: var(--navy);
+    font-weight: 600;
+    text-align: end;
+  }
+
+  @media (max-width: 559px) {
+    .contacts div {
+      flex-direction: column;
+    }
+
+    .contacts dd {
+      text-align: start;
+    }
+  }
+</style>

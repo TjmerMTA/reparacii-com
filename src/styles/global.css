@@ -322,3 +322,218 @@ svg {
     animation-duration: 0.01ms !important;
   }
 }
+
+/* Текст внутрішніх сторінок (вміст слота layouts/Page.astro). */
+.prose {
+  min-inline-size: 0;
+  font-size: 18px;
+}
+
+.prose > :first-child {
+  margin-block-start: 0;
+}
+
+.prose h2 {
+  margin-block: 56px 16px;
+  font-size: clamp(24px, 2.8vw, 32px);
+  line-height: 1.2;
+  scroll-margin-block-start: calc(var(--header-h) + 16px);
+}
+
+.prose h3 {
+  margin-block: 32px 10px;
+  font-size: clamp(19px, 2vw, 21px);
+}
+
+.prose p {
+  margin-block: 0 16px;
+}
+
+.prose ul:not([class]),
+.prose ol:not([class]) {
+  display: grid;
+  gap: 10px;
+  margin-block: 0 20px;
+}
+
+.prose ul:not([class]) > li {
+  position: relative;
+  padding-inline-start: 26px;
+}
+
+.prose ul:not([class]) > li::before {
+  content: '';
+  position: absolute;
+  inset-block-start: 0.62em;
+  inset-inline-start: 6px;
+  inline-size: 8px;
+  block-size: 8px;
+  border-radius: 50%;
+  background: var(--blue);
+}
+
+.prose ol:not([class]) {
+  counter-reset: item;
+}
+
+.prose ol:not([class]) > li {
+  position: relative;
+  padding-inline-start: 34px;
+  counter-increment: item;
+}
+
+.prose ol:not([class]) > li::before {
+  content: counter(item) '.';
+  position: absolute;
+  inset-inline-start: 0;
+  color: var(--blue);
+  font-weight: 800;
+}
+
+.prose strong {
+  color: var(--navy);
+}
+
+.prose a:not([class]) {
+  font-weight: 600;
+}
+
+/* Покрокова інструкція */
+.steplist {
+  display: grid;
+  gap: 16px;
+  margin-block: 24px;
+  counter-reset: step;
+}
+
+.steplist > li {
+  position: relative;
+  padding: 22px 24px 22px 84px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--white);
+  box-shadow: var(--shadow);
+  counter-increment: step;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.steplist > li:hover {
+  transform: translateY(-2px);
+  border-color: var(--sky-200);
+  box-shadow: var(--shadow-hover);
+}
+
+.steplist > li::before {
+  content: counter(step, decimal-leading-zero);
+  position: absolute;
+  inset-block-start: 20px;
+  inset-inline-start: 24px;
+  display: grid;
+  place-items: center;
+  inline-size: 44px;
+  block-size: 44px;
+  border-radius: 50%;
+  background: var(--sky-100);
+  color: var(--blue);
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.steplist h3 {
+  margin: 0 0 8px;
+}
+
+.steplist p:last-child,
+.steplist ul:last-child {
+  margin-block-end: 0;
+}
+
+/* Короткі факти плиткою */
+.facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-block: 24px;
+}
+
+.facts > li {
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--sky-50);
+}
+
+.facts dt,
+.facts .facts__label {
+  display: block;
+  margin-block-end: 4px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.facts .facts__value {
+  display: block;
+  color: var(--navy);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+/* Таблиця «ситуація — що робити» */
+.cases {
+  display: grid;
+  gap: 12px;
+  margin-block: 24px;
+}
+
+.cases > li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: 8px 24px;
+  padding: 18px 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+}
+
+.cases .cases__q {
+  color: var(--navy);
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.cases .cases__a {
+  font-size: 17px;
+}
+
+.tag {
+  display: inline-block;
+  padding: 2px 12px;
+  border-radius: 999px;
+  background: var(--sky-100);
+  color: var(--blue);
+  font-size: 15px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+@media (max-width: 719px) {
+  .steplist > li {
+    padding: 72px 20px 20px;
+  }
+
+  .steplist > li::before {
+    inset-block-start: 18px;
+    inset-inline-start: 20px;
+  }
+
+  .facts,
+  .cases > li {
+    grid-template-columns: 1fr;
+  }
+}

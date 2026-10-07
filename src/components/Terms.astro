@@ -4,6 +4,8 @@
 // src/data/site.ts; поки там заглушки, вони підсвічені.
 import Stub from './Stub.astro';
 import { site } from '../data/site';
+import { pages } from '../data/pages';
+import Icon from './Icon.astro';
 
 const { executor, contacts, prices } = site;
 ---
@@ -36,6 +38,12 @@ const { executor, contacts, prices } = site;
             ))
           }
         </ul>
+        <p class="terms__more">
+          <a class="arrow-link" href={pages.pricing.path}>
+            Послуги та ціни докладно
+            <Icon name="arrow" size={20} />
+          </a>
+        </p>
       </div>
 
       <div class="card card--hover terms__card" data-reveal>
@@ -135,6 +143,12 @@ const { executor, contacts, prices } = site;
     color: var(--navy);
     font-weight: 600;
     text-align: end;
+  }
+
+  .terms__more {
+    margin-block-start: auto;
+    padding-block-start: 20px;
+    font-size: 17px;
   }
 
   .terms__private {

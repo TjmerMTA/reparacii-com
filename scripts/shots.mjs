@@ -1,4 +1,5 @@
-// Знімає повні скриншоти головної із готової збірки (dist) на 1440 і 390 px.
+// Знімає повні скриншоти головної і типових сторінок із готової збірки (dist)
+// на 1440 і 390 px.
 // Запуск: npm run build && npm run shots
 // Нічого не публікує: піднімає локальний сервер на 127.0.0.1 і гасить його.
 import { createServer } from 'node:http';
@@ -46,10 +47,17 @@ await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
 const base = `http://127.0.0.1:${server.address().port}`;
 await mkdir(out, { recursive: true });
 
-const targets = [
-  { name: 'home-1440', path: '/', width: 1440, height: 900, scale: 1 },
-  { name: 'home-390', path: '/', width: 390, height: 844, scale: 2, mobile: true },
+const shotPages = [
+  { name: 'home', path: '/' },
+  { name: 'yak-podaty', path: '/yak-podaty-zaiavu-do-reiestru-zbytkiv/' },
+  { name: 'a3-3', path: '/a3-3-vtrata-zhytla/' },
+  { name: 'pytannia', path: '/pytannia/' },
 ];
+
+const targets = shotPages.flatMap((item) => [
+  { name: `${item.name}-1440`, path: item.path, width: 1440, height: 900, scale: 1 },
+  { name: `${item.name}-390`, path: item.path, width: 390, height: 844, scale: 2, mobile: true },
+]);
 
 const browser = await puppeteer.launch({ executablePath: chrome, headless: true });
 try {

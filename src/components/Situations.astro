@@ -1,5 +1,6 @@
 ---
 import Icon from './Icon.astro';
+import { pages } from '../data/pages';
 
 // Факти про категорії — з розбору (джерела: сторінки RD4U та Дії).
 const cards = [
@@ -9,6 +10,7 @@ const cards = [
     title: 'Втрата житла або місця проживання',
     text: 'Для тих, хто був змушений залишити свою домівку через війну.',
     fact: 'Подати може не лише власник. Кожен член родини подає окрему заяву.',
+    href: pages.a33.path,
   },
   {
     code: 'A3.6',
@@ -16,6 +18,7 @@ const cards = [
     title: 'Втрата доступу або контролю над майном',
     text: 'Для власників нерухомості на тимчасово окупованих територіях.',
     fact: 'Подають лише власники та співвласники, кожен окремо. Зруйноване житло — це інші категорії: A3.1 і A3.2.',
+    href: pages.a36.path,
   },
 ] as const;
 ---
@@ -59,10 +62,17 @@ const cards = [
                 <h3>{card.title}</h3>
                 <p class="situation__lead">{card.text}</p>
                 <p class="situation__fact">{card.fact}</p>
-                <a class="arrow-link situation__link" href="#konsultatsiia">
-                  Обговорити ситуацію
-                  <Icon name="arrow" size={20} />
-                </a>
+                <p class="situation__links">
+                  <a class="arrow-link" href={card.href}>
+                    Детальніше{' '}
+                    <span class="visually-hidden"> про категорію {card.code}</span>
+                    <Icon name="arrow" size={20} />
+                  </a>
+                  <a class="situation__talk" href="#konsultatsiia">
+                    Обговорити ситуацію{' '}
+                    <span class="visually-hidden"> за категорією {card.code}</span>
+                  </a>
+                </p>
               </div>
             </div>
           </li>
@@ -135,11 +145,24 @@ const cards = [
     line-height: 1.45;
   }
 
-  .situation__link {
-    align-self: flex-start;
+  .situation__links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 24px;
     margin-block-start: auto;
     padding-block-start: 20px;
     font-size: 17px;
+  }
+
+  .situation__talk {
+    color: var(--muted);
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .situation__talk:hover {
+    color: var(--blue);
   }
 
   @media (max-width: 1023px) {

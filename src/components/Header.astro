@@ -1,6 +1,13 @@
 ---
 import Logo from './Logo.astro';
-import { nav } from '../data/site';
+import { pages, headerNav, type PageKey } from '../data/pages';
+
+interface Props {
+  current?: PageKey;
+  ctaHref?: string;
+}
+
+const { current, ctaHref = '/#konsultatsiia' } = Astro.props;
 ---
 
 <header class="header" data-header>
@@ -21,16 +28,20 @@ import { nav } from '../data/site';
     <nav class="nav" id="site-nav" aria-label="Головне меню" data-nav>
       <ul class="nav__list">
         {
-          nav.map((item) => (
+          headerNav.map((key) => (
             <li>
-              <a class="nav__link" href={item.href}>
-                {item.label}
+              <a
+                class="nav__link"
+                href={pages[key].path}
+                aria-current={key === current ? 'page' : undefined}
+              >
+                {pages[key].label}
               </a>
             </li>
           ))
         }
       </ul>
-      <a class="btn btn--ghost nav__cta" href="/#konsultatsiia">Безкоштовна консультація</a>
+      <a class="btn btn--ghost nav__cta" href={ctaHref}>Безкоштовна консультація</a>
     </nav>
   </div>
 </header>
@@ -94,13 +105,13 @@ import { nav } from '../data/site';
   .nav {
     display: flex;
     align-items: center;
-    gap: clamp(20px, 3vw, 40px);
+    gap: clamp(16px, 2vw, 32px);
   }
 
   .nav__list {
     display: flex;
     align-items: center;
-    gap: clamp(16px, 2.4vw, 32px);
+    gap: clamp(14px, 1.8vw, 28px);
   }
 
   .nav__link {
@@ -112,7 +123,8 @@ import { nav } from '../data/site';
     white-space: nowrap;
   }
 
-  .nav__link:hover {
+  .nav__link:hover,
+  .nav__link[aria-current='page'] {
     color: var(--blue);
   }
 
@@ -162,7 +174,7 @@ import { nav } from '../data/site';
     transform: translateY(-7px) rotate(-45deg);
   }
 
-  @media (max-width: 1023px) {
+  @media (max-width: 1199px) {
     .header {
       --header-h: 68px;
     }

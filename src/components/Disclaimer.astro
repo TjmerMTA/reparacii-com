@@ -1,6 +1,7 @@
 ---
 // Смуга-застереження одразу під першим блоком. Обов’язкова, не прибирати.
 import Icon from './Icon.astro';
+import { pages } from '../data/pages';
 ---
 
 <aside class="disclaimer" aria-label="Важливе застереження">
@@ -9,7 +10,7 @@ import Icon from './Icon.astro';
     <p>
       <strong>Ми — приватний сервіс.</strong> Не державний орган, не Міжнародний реєстр збитків, не Рада
       Європи і не Дія. Заяву до Реєстру можна подати{' '}
-      <a href="#samostiino">самостійно і безкоштовно</a>.
+      <a href={pages.howto.path}>самостійно і безкоштовно</a>.
     </p>
   </div>
 </aside>

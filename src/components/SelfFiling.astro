@@ -1,8 +1,9 @@
 ---
 // Обов’язковий блок: заяву можна подати самостійно і безкоштовно.
-// Факти — з розбору (FAQ Реєстру, сторінки Дії). Не прибирати і не ховати вниз.
+// Факти звірено з FAQ Реєстру та сторінками Дії. Не прибирати і не ховати вниз.
 import Icon from './Icon.astro';
 import { site } from '../data/site';
+import { pages } from '../data/pages';
 
 const facts = [
   'Заява подається лише в електронному вигляді — через портал Дія.',
@@ -30,6 +31,12 @@ const facts = [
           ))
         }
       </ul>
+      <p class="self__more">
+        <a class="arrow-link" href={pages.howto.path}>
+          Покрокова інструкція
+          <Icon name="arrow" size={20} />
+        </a>
+      </p>
     </div>
 
     <ul class="self__cards">
@@ -43,8 +50,8 @@ const facts = [
         </a>
       </li>
       <li class="card card--hover self__card" data-reveal>
-        <h3>Безоплатна правова допомога</h3>
-        <p>Державна система БПД консультує безкоштовно. Дзвінки в межах України безоплатні.</p>
+        <h3>Безоплатна правнича допомога</h3>
+        <p>Державна система консультує безкоштовно — зокрема щодо заяв до Реєстру. Дзвінки в межах України безкоштовні.</p>
         <a class="self__phone" href={site.freeLegalAidPhone.href}>
           <Icon name="phone" size={24} />
           {site.freeLegalAidPhone.display}
@@ -85,6 +92,10 @@ const facts = [
     flex: none;
     margin-block-start: 2px;
     color: var(--blue);
+  }
+
+  .self__more {
+    margin-block-start: 28px;
   }
 
   .self__cards {

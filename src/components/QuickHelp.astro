@@ -1,0 +1,121 @@
+---
+// Бічний блок внутрішніх сторінок: спершу безкоштовні шляхи, потім — ми.
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+import { pages } from '../data/pages';
+---
+
+<div class="quick">
+  <div class="card quick__card">
+    <p class="quick__title">Можна без нас і безкоштовно</p>
+    <ul class="quick__list">
+      <li>
+        <a href={pages.howto.path}>Інструкція: як подати самостійно</a>
+      </li>
+      <li>
+        <a href={site.links.diia} target="_blank" rel="noopener noreferrer">
+          Розділ «Репарації» в Дії
+          <Icon name="external" size={16} />
+          <span class="visually-hidden">(відкриється в новій вкладці)</span>
+        </a>
+      </li>
+    </ul>
+    <p class="quick__label">Безоплатна правнича допомога</p>
+    <a class="quick__phone" href={site.freeLegalAidPhone.href}>
+      <Icon name="phone" size={20} />
+      {site.freeLegalAidPhone.display}
+    </a>
+  </div>
+
+  <div class="card quick__card quick__card--accent">
+    <p class="quick__title">Складно розібратися самостійно?</p>
+    <p class="quick__text">Перша консультація безкоштовна. Супровід — платний, вартість називаємо заздалегідь.</p>
+    <a class="btn quick__btn" href="#konsultatsiia">
+      Отримати консультацію
+      <Icon name="arrow" size={18} />
+    </a>
+    <a class="quick__more" href={pages.pricing.path}>Послуги та ціни</a>
+  </div>
+</div>
+
+<style>
+  .quick {
+    display: grid;
+    gap: 20px;
+  }
+
+  .quick__card {
+    display: grid;
+    gap: 12px;
+    padding: 24px;
+    font-size: 15px;
+    line-height: 1.45;
+  }
+
+  .quick__card--accent {
+    background: linear-gradient(140deg, var(--sky-100) 0%, #dbe9ff 100%);
+    border-color: var(--sky-200);
+  }
+
+  .quick__title {
+    color: var(--navy);
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1.25;
+  }
+
+  .quick__list {
+    display: grid;
+    gap: 8px;
+  }
+
+  .quick__list a {
+    font-weight: 600;
+  }
+
+  .quick__list :global(svg) {
+    margin-inline-start: 4px;
+    vertical-align: -2px;
+  }
+
+  .quick__label {
+    margin-block-start: 8px;
+    padding-block-start: 14px;
+    border-block-start: 1px solid var(--line);
+    color: var(--muted);
+  }
+
+  .quick__phone {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--navy);
+    font-size: 22px;
+    font-weight: 800;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .quick__phone:hover {
+    color: var(--blue);
+  }
+
+  .quick__phone :global(svg) {
+    color: var(--blue);
+  }
+
+  .quick__text {
+    color: var(--ink);
+  }
+
+  .quick__btn {
+    min-block-size: 50px;
+    padding: 12px 18px;
+    font-size: 16px;
+  }
+
+  .quick__more {
+    justify-self: center;
+    font-weight: 700;
+  }
+</style>

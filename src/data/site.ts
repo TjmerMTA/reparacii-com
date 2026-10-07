@@ -39,6 +39,9 @@ export const site = {
     legalName: '[ФОП / ТОВ — повна назва виконавця]',
     code: '[РНОКПП / код ЄДРПОУ]',
     address: '[юридична адреса]',
+    // Тип для розмітки schema.org. 'LegalService' ставити лише тоді, коли послугу
+    // справді надає юрист або адвокат; інакше лишити 'Organization'.
+    schemaType: 'Organization' as 'Organization' | 'LegalService',
   },
 
   // TODO(заглушка): контакти.
@@ -68,6 +71,20 @@ export const site = {
     },
   ] satisfies Price[],
 
+  // TODO(заглушка): умови роботи — формулює клієнт, перевіряє юрист.
+  terms: {
+    contract: '[як оформлюємо співпрацю: договір, акт]',
+    payment: '[порядок оплати]',
+  },
+
+  // TODO(заглушка): політика конфіденційності. Потрібна перевірка юриста.
+  privacy: {
+    recipients: '[кому передаються дані: сервіс обробки заявок, месенджер, пошта]',
+    retention: '[строк зберігання звернень]',
+    rights: '[права суб’єкта персональних даних — формулює юрист]',
+    revision: '[дата редакції політики]',
+  },
+
   // Блок «Відгуки» і пункт меню з’являються самі, щойно тут буде хоча б один
   // реальний відгук. Вигадані відгуки не публікуємо.
   reviews: [] as Review[],
@@ -83,10 +100,10 @@ export const site = {
     diia: 'https://diia.gov.ua/reparatsii-mizhnarodnyi-reiestr-zbytkiv',
     rd4u: 'https://rd4u.coe.int/uk/',
     rd4uLabel: 'rd4u.coe.int',
-    freeLegalAid: 'https://rd4u.coe.int/uk/free-legal-aid-system',
+    freeLegalAid: 'https://legalaid.gov.ua/',
   },
 
-  // Державна система безоплатної правової допомоги — реальний номер, не заглушка.
+  // Державна система безоплатної правничої допомоги — реальний номер, не заглушка.
   freeLegalAidPhone: {
     display: '0 800 213 103',
     href: 'tel:0800213103',
@@ -95,10 +112,12 @@ export const site = {
 
 export const hasReviews = site.reviews.length > 0;
 
-export const nav = [
-  { href: '/#posluhy', label: 'Послуги' },
-  { href: '/#etapy', label: 'Етапи роботи' },
-  { href: '/#reiestr', label: 'Про Реєстр' },
-  { href: '/#tsiny', label: 'Вартість' },
-  ...(hasReviews ? [{ href: '/#vidhuky', label: 'Відгуки' }] : []),
-];
+/** Усі значення-заглушки, що лишилися у файлі (для запобіжника перед запуском). */
+export function findStubs(value: unknown = site, path = 'site'): string[] {
+  if (typeof value === 'string') return isStub(value) ? [path] : [];
+  if (Array.isArray(value)) return value.flatMap((item, index) => findStubs(item, `${path}[${index}]`));
+  if (value && typeof value === 'object') {
+    return Object.entries(value).flatMap(([key, item]) => findStubs(item, `${path}.${key}`));
+  }
+  return [];
+}

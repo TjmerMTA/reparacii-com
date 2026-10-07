@@ -1,0 +1,130 @@
+---
+// Каркас внутрішньої сторінки: смуга-застереження, хлібні крихти, H1, дата
+// оновлення, текст із бічним блоком, «Читайте також» і форма консультації.
+import Base from './Base.astro';
+import Disclaimer from '../components/Disclaimer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import QuickHelp from '../components/QuickHelp.astro';
+import Related from '../components/Related.astro';
+import Consult from '../components/Consult.astro';
+import { pages, formatDate, type PageKey } from '../data/pages';
+
+interface Props {
+  page: PageKey;
+  title: string;
+  description: string;
+  h1: string;
+  lead?: string;
+  eyebrow?: string;
+  related?: PageKey[];
+  pageType?: string;
+  schema?: object[];
+  /** Бічний блок із безкоштовними шляхами і кнопкою консультації. */
+  aside?: boolean;
+}
+
+const {
+  page,
+  title,
+  description,
+  h1,
+  lead,
+  eyebrow,
+  related = [],
+  pageType,
+  schema,
+  aside = true,
+} = Astro.props;
+const info = pages[page];
+---
+
+<Base page={page} title={title} description={description} pageType={pageType} schema={schema}>
+  <Disclaimer />
+
+  <header class="page-head">
+    <div class="container">
+      <Breadcrumbs page={page} />
+      {eyebrow && <p class="eyebrow page-head__eyebrow"><span>{eyebrow}</span></p>}
+      <h1>{h1}</h1>
+      {lead && <p class="page-head__lead">{lead}</p>}
+      <p class="page-head__meta">
+        Оновлено: <time datetime={info.updated}>{formatDate(info.updated)}</time>
+      </p>
+    </div>
+  </header>
+
+  <div class:list={['container', 'page-grid', { 'page-grid--single': !aside }]}>
+    <article class="prose">
+      <slot />
+    </article>
+    {
+      aside && (
+        <aside class="page-aside" aria-label="Корисні посилання">
+          <QuickHelp />
+        </aside>
+      )
+    }
+  </div>
+
+  {related.length > 0 && <Related keys={related} />}
+  <Consult />
+</Base>
+
+<style>
+  .page-head {
+    padding-block: clamp(28px, 4vw, 48px) clamp(32px, 5vw, 56px);
+    background: linear-gradient(180deg, var(--white) 0%, var(--sky-50) 100%);
+    border-block-end: 1px solid var(--line);
+  }
+
+  .page-head__eyebrow {
+    margin-block: 24px -8px;
+  }
+
+  .page-head h1 {
+    margin-block-start: 20px;
+    max-inline-size: 22ch;
+    font-size: clamp(32px, 4.4vw, 52px);
+  }
+
+  .page-head__lead {
+    margin-block-start: 20px;
+    max-inline-size: 62ch;
+    color: var(--muted);
+    font-size: clamp(18px, 1.7vw, 20px);
+  }
+
+  .page-head__meta {
+    margin-block-start: 20px;
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .page-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: clamp(32px, 5vw, 72px);
+    align-items: start;
+    padding-block: clamp(40px, 6vw, 72px) clamp(56px, 8vw, 104px);
+  }
+
+  .page-grid--single {
+    grid-template-columns: minmax(0, 820px);
+  }
+
+  .page-aside {
+    position: sticky;
+    inset-block-start: calc(var(--header-h) + 24px);
+  }
+
+  @media (max-width: 1023px) {
+    .page-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .page-aside {
+      position: static;
+    }
+  }
+</style>
