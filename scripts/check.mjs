@@ -1,5 +1,6 @@
 // Перевірка готової збірки (dist): внутрішні посилання та якорі, один H1,
-// унікальні title/description, noindex, хлібні крихти, розмітка JSON-LD.
+// унікальні title/description, noindex, хлібні крихти, розмітка JSON-LD,
+// латиниця в кодах категорій, розшифрування ТОТ.
 // Запуск: npm run build && npm run check   (з --external — ще й зовнішні посилання;
 // можна передати іншу теку збірки першим аргументом)
 import { readFile, readdir } from 'node:fs/promises';
@@ -55,6 +56,19 @@ for (const [path, { html, body }] of pages) {
   descriptions.set(description, path);
   if (title && title.length > 90) fail(`title задовгий: ${title.length}`);
   if (description && description.length > 200) fail(`description задовгий: ${description.length}`);
+
+  // Коди категорій пишемо латиницею (A3.3, B1.1, C3.2): кирилична літера перед
+  // цифрою виглядає так само, але ламає пошук і копіювання.
+  const text = body.replace(/<[^>]+>/g, ' ');
+  const meta = `${title ?? ''} ${description ?? ''} ${all(html, /<script type="application\/ld\+json">([\s\S]*?)<\/script>/g).join(' ')}`;
+  const cyrCodes = [...`${text} ${meta}`.matchAll(/(?<![А-Яа-яІЇЄҐіїєґ])[АВСЕО]\d[\d.]*/g)].map((m) => m[0]);
+  if (cyrCodes.length) fail(`кирилична літера в коді категорії: ${[...new Set(cyrCodes)].join(', ')}`);
+
+  // Скорочення ТОТ при першій появі на сторінці має бути розшифроване: «… (ТОТ)».
+  const tot = text.search(/(?<![А-Яа-яІЇЄҐіїєґ])ТОТ(?![А-Яа-яІЇЄҐіїєґ])/);
+  if (tot !== -1 && !/тимчасово окупован[а-яії]+ територі[а-яії]+\s*\($/.test(text.slice(0, tot))) {
+    fail('скорочення ТОТ не розшифроване при першій появі');
+  }
 
   if (!/<html lang="uk"/.test(html)) fail('немає lang="uk"');
   if (!/<link rel="canonical"/.test(html)) fail('немає canonical');

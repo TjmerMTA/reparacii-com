@@ -511,6 +511,18 @@ svg {
   font-size: 17px;
 }
 
+.cases .cases__src {
+  grid-column: 1 / -1;
+  justify-self: start;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.cases .cases__src:hover {
+  color: var(--blue);
+}
+
 .tag {
   display: inline-block;
   padding: 2px 12px;

@@ -56,7 +56,7 @@ export const src = {
     href: 'https://diia.gov.ua/services/zaiava-v-katehorii-a33-vtrata-zhytla-abo-mistsia-prozhyvannia',
   },
   diiaA36: {
-    label: 'Дія: послуга «A3.6 Втрата доступу або контролю над нерухомим майном на ТОТ»',
+    label: 'Дія: послуга «A3.6 Втрата доступу або контролю над нерухомим майном на тимчасово окупованих територіях»',
     href: 'https://diia.gov.ua/services/zaiava-v-katehorii-a36-vtrata-dostupu-abo-kontroliu-nad-nerukhomym-mainom-na-tymchasovo-okupovanykh-terytoriiakh',
   },
   diiaA36Disclaimer: {

@@ -9,8 +9,8 @@ import { pages } from '../data/pages';
 <section class="section" id="reiestr" aria-labelledby="reiestr-title">
   <div class="container registry">
     <div class="registry__aside" data-reveal>
-      <p class="eyebrow"><span>Міжнародний реєстр збитків</span><span>Рада Європи</span></p>
-      <h2 id="reiestr-title">Що таке <span class="accent">Міжнародний реєстр збитків?</span></h2>
+      <p class="eyebrow"><span>Міжнародний Реєстр збитків</span><span>Рада Європи</span></p>
+      <h2 id="reiestr-title">Що таке <span class="accent">Міжнародний Реєстр збитків?</span></h2>
 
       <div class="registry__source">
         <p>
@@ -22,6 +22,25 @@ import { pages } from '../data/pages';
           <a href={site.links.rd4u} target="_blank" rel="noopener noreferrer">{site.links.rd4uLabel}</a>
         </p>
       </div>
+
+      <dl class="registry__facts">
+        <div>
+          <dt>Приймає заяви</dt>
+          <dd>з 2 квітня 2024 року</dd>
+        </div>
+        <div>
+          <dt>Категорій заяв</dt>
+          <dd>43, з них 21 — для фізичних осіб</dd>
+        </div>
+        <div>
+          <dt>Плата за подання</dt>
+          <dd>не стягується</dd>
+        </div>
+        <div>
+          <dt>Виплати</dt>
+          <dd>Реєстр не призначає</dd>
+        </div>
+      </dl>
     </div>
 
     <div class="registry__body" data-reveal>
@@ -35,12 +54,12 @@ import { pages } from '../data/pages';
         влади та місцевого самоврядування.
       </p>
       <p>
-        Заяви перевіряються на відповідність правилам. Ті, що відповідають вимогам, вносяться до Реєстру
-        для подальшого розгляду в межах компенсаційного механізму.
+        Реєстр перевіряє, чи заява відповідає правилам. Заяви, що відповідають вимогам, він вносить до
+        Реєстру для подальшого розгляду в межах компенсаційного механізму.
       </p>
       <p>
         Реєстр не є судом, трибуналом, компенсаційною комісією чи компенсаційним фондом і виплат не
-        призначає. Розглядати заяви по суті буде майбутня Міжнародна компенсаційна комісія — коли розпочне
+        призначає. Розглядати заяви по суті буде майбутня Міжнародна Компенсаційна комісія — коли розпочне
         роботу.
       </p>
       <p>
@@ -90,6 +109,38 @@ import { pages } from '../data/pages';
 
   .registry__source a {
     font-weight: 700;
+  }
+
+  .registry__facts {
+    display: grid;
+    margin-block-start: 20px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    background: var(--white);
+    font-size: 16px;
+    line-height: 1.4;
+  }
+
+  .registry__facts div {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 4px 20px;
+    padding: 14px 20px;
+  }
+
+  .registry__facts div + div {
+    border-block-start: 1px solid var(--line);
+  }
+
+  .registry__facts dt {
+    color: var(--muted);
+  }
+
+  .registry__facts dd {
+    color: var(--navy);
+    font-weight: 700;
+    text-align: end;
   }
 
   .registry__body {

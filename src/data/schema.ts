@@ -18,7 +18,7 @@ export function organization() {
     '@id': ORG_ID,
     name: site.name,
     legalName: executor.legalName,
-    description: 'Приватний сервіс: допомога з підготовкою заяви до Міжнародного реєстру збитків для України.',
+    description: 'Приватний сервіс: допомога з підготовкою заяви до Міжнародного Реєстру збитків для України.',
     url: abs('/'),
     logo: abs('/favicon.svg'),
     taxID: executor.code,
