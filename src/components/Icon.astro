@@ -1,0 +1,41 @@
+---
+// Власні лінійні іконки (24×24, stroke). Чужих наборів і логотипів тут немає.
+const icons = {
+  arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
+  external: '<path d="M8 16 17 7M9 7h8v8"/>',
+  chevron: '<path d="m9 5 7 7-7 7"/>',
+  chat: '<path d="M5 5h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-6l-5 4v-4H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"/><path d="M8 11h.01M12 11h.01M16 11h.01"/>',
+  shield: '<path d="M12 3 4.5 6v5.5c0 4.5 3 8 7.5 9.5 4.5-1.500 7.5-5 7.5-9.5V6L12 3Z"/><path d="m9 12 2.200 2.200L15.200 10"/>',
+  doc: '<path d="M7 3h7l5 5v11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M14 3v5h5M9 13h6M9 17h6"/>',
+  wifi: '<path d="M2.500 9a14 14 0 0 1 19 0M5.500 12.500a9.500 9.500 0 0 1 13 0M8.500 16a5 5 0 0 1 7 0"/><path d="M12 19.500h.01"/>',
+  user: '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+  phone: '<path d="M6.500 3h3l1.500 4.500-2 1.500a12 12 0 0 0 6 6l1.500-2 4.500 1.500v3a2 2 0 0 1-2.200 2A17 17 0 0 1 4.500 5.200 2 2 0 0 1 6.500 3Z"/>',
+  alert: '<path d="M12 8v5M12 16.500h.01"/>',
+  info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.500h.01"/>',
+  check: '<path d="m5 12.500 4.500 4.500L19 7.500"/>',
+  lock: '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
+} as const;
+
+interface Props {
+  name: keyof typeof icons;
+  size?: number;
+  class?: string;
+}
+
+const { name, size = 24, class: className } = Astro.props;
+---
+
+<svg
+  class={className}
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.8"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+  set:html={icons[name]}
+/>

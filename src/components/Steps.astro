@@ -1,0 +1,165 @@
+---
+import Icon from './Icon.astro';
+
+const steps = [
+  {
+    title: 'Розбираємо ситуацію',
+    text: 'Уточнюємо деталі, відповідаємо на запитання та визначаємо, які категорії заяв вам підходять.',
+  },
+  {
+    title: 'Готуємо документи',
+    text: 'Допомагаємо зібрати та підготувати необхідні документи і докази.',
+  },
+  {
+    title: 'Супроводжуємо подання',
+    text: 'Пояснюємо, як подати заяву в Дії, і залишаємося на зв’язку, поки ви подаєте її самі.',
+  },
+];
+---
+
+<section class="steps" id="etapy" aria-labelledby="etapy-title">
+  <div class="container steps__inner">
+    <h2 id="etapy-title" data-reveal>Зрозумілий процес на кожному етапі</h2>
+
+    <ol class="steps__list">
+      {
+        steps.map((step, index) => (
+          <li class="steps__item" data-reveal>
+            <span class="steps__num">{String(index + 1).padStart(2, '0')}</span>
+            <h3>{step.title}</h3>
+            <p>{step.text}</p>
+            {index < steps.length - 1 && <Icon name="chevron" size={22} class="steps__chevron" />}
+          </li>
+        ))
+      }
+    </ol>
+
+    <p class="steps__note" data-reveal>
+      <Icon name="lock" size={22} />
+      <span>
+        Заяву ви подаєте самі — у власному кабінеті Дії. Ми не подаємо її за вас і ніколи не просимо
+        паролі, ключі електронного підпису чи банківські коди.
+      </span>
+    </p>
+  </div>
+</section>
+
+<style>
+  .steps {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(56px, 7vw, 96px);
+    background:
+      radial-gradient(90% 130% at 100% 0%, rgb(41 104 210 / 55%) 0%, transparent 58%),
+      radial-gradient(60% 90% at 88% 110%, rgb(20 99 233 / 30%) 0%, transparent 60%),
+      linear-gradient(135deg, #0a2150 0%, #0f2f6b 100%);
+    color: #dbe6fb;
+  }
+
+  .steps__inner {
+    position: relative;
+  }
+
+  .steps h2 {
+    color: var(--white);
+  }
+
+  .steps__list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-block-start: clamp(32px, 4vw, 48px);
+  }
+
+  .steps__item {
+    position: relative;
+    padding-inline: clamp(20px, 3vw, 48px);
+  }
+
+  .steps__item:first-child {
+    padding-inline-start: 0;
+  }
+
+  .steps__item + .steps__item {
+    border-inline-start: 1px solid rgb(255 255 255 / 18%);
+  }
+
+  .steps__num {
+    display: block;
+    color: var(--yellow);
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 1.1;
+  }
+
+  .steps__item h3 {
+    margin-block-start: 12px;
+    max-inline-size: 12ch;
+    color: var(--white);
+    font-weight: 700;
+  }
+
+  .steps__item p {
+    margin-block-start: 14px;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  .steps__item :global(.steps__chevron) {
+    position: absolute;
+    inset-block-start: 46px;
+    inset-inline-end: clamp(12px, 2vw, 28px);
+    color: rgb(255 255 255 / 70%);
+  }
+
+  .steps__note {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-block-start: clamp(32px, 4vw, 48px);
+    padding: 18px 22px;
+    border: 1px solid rgb(255 255 255 / 18%);
+    border-radius: var(--radius);
+    background: rgb(255 255 255 / 7%);
+    color: var(--white);
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .steps__note :global(svg) {
+    flex: none;
+    margin-block-start: 1px;
+    color: var(--yellow);
+  }
+
+  @media (max-width: 767px) {
+    .steps__list {
+      grid-template-columns: 1fr;
+    }
+
+    .steps__item,
+    .steps__item:first-child {
+      padding: 24px 0;
+    }
+
+    .steps__item:first-child {
+      padding-block-start: 0;
+    }
+
+    .steps__item + .steps__item {
+      border-inline-start: 0;
+      border-block-start: 1px solid rgb(255 255 255 / 18%);
+    }
+
+    .steps__item h3 {
+      max-inline-size: none;
+    }
+
+    .steps__item :global(.steps__chevron) {
+      display: none;
+    }
+
+    .steps__note {
+      margin-block-start: 8px;
+    }
+  }
+</style>

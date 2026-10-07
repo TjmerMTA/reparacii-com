@@ -1,0 +1,167 @@
+---
+import Icon from './Icon.astro';
+
+// Факти про категорії — з розбору (джерела: сторінки RD4U та Дії).
+const cards = [
+  {
+    code: 'A3.3',
+    art: 'leave',
+    title: 'Втрата житла або місця проживання',
+    text: 'Для тих, хто був змушений залишити свою домівку через війну.',
+    fact: 'Подати може не лише власник. Кожен член родини подає окрему заяву.',
+  },
+  {
+    code: 'A3.6',
+    art: 'lock',
+    title: 'Втрата доступу або контролю над майном',
+    text: 'Для власників нерухомості на тимчасово окупованих територіях.',
+    fact: 'Подають лише власники та співвласники, кожен окремо. Зруйноване житло — це інші категорії: A3.1 і A3.2.',
+  },
+] as const;
+---
+
+<section class="section section--tint" id="posluhy" aria-labelledby="posluhy-title">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow"><span>Кому допомагаємо</span></p>
+      <h2 id="posluhy-title">Ваша ситуація&nbsp;— наш <span class="accent">план дій</span></h2>
+    </div>
+
+    <ul class="cards">
+      {
+        cards.map((card) => (
+          <li class="card card--hover situation" data-reveal>
+            <span class="situation__code">{card.code}</span>
+            <div class="situation__body">
+              <span class="situation__art">
+                {card.art === 'leave' ? (
+                  <svg viewBox="0 0 120 120" width="120" height="120" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M18 60 50 32l32 28" stroke="#0d1b3e" stroke-width="4" />
+                    <path d="M26 54v38h48V54M16 92h70" stroke="#0d1b3e" stroke-width="4" />
+                    <circle cx="50" cy="62" r="5.500" fill="#0d1b3e" />
+                    <path d="M43 92V78a7 7 0 0 1 14 0v14" fill="#0d1b3e" stroke="#0d1b3e" stroke-width="2" />
+                    <path d="M68 76h34m-10-10 10 10-10 10" stroke="#1463e9" stroke-width="4.500" />
+                  </svg>
+                ) : (
+                  <svg viewBox="0 0 120 120" width="120" height="120" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M14 66 44 40l20 17" stroke="#0d1b3e" stroke-width="4" />
+                    <path d="M22 60v36h44M12 96h56" stroke="#0d1b3e" stroke-width="4" />
+                    <path d="M36 96V76h14v20" stroke="#0d1b3e" stroke-width="4" />
+                    <path d="M84 16c-9.400 0-16 7-16 15.500C68 43 84 58 84 58s16-15 16-26.500C100 23 93.400 16 84 16Z" fill="#1463e9" />
+                    <circle cx="84" cy="31.500" r="6" fill="#fff" />
+                    <rect x="70" y="76" width="32" height="26" rx="5" fill="#fff" stroke="#0d1b3e" stroke-width="4" />
+                    <path d="M77 76v-6a9 9 0 0 1 18 0v6" stroke="#0d1b3e" stroke-width="4" />
+                    <circle cx="86" cy="89" r="3" fill="#0d1b3e" />
+                  </svg>
+                )}
+              </span>
+              <div class="situation__text">
+                <h3>{card.title}</h3>
+                <p class="situation__lead">{card.text}</p>
+                <p class="situation__fact">{card.fact}</p>
+                <a class="arrow-link situation__link" href="#konsultatsiia">
+                  Обговорити ситуацію
+                  <Icon name="arrow" size={20} />
+                </a>
+              </div>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .situation {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: clamp(20px, 2.6vw, 32px);
+  }
+
+  .situation__code {
+    align-self: flex-start;
+    padding: 4px 18px;
+    border-radius: 999px;
+    background: var(--sky-100);
+    color: var(--blue);
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+  }
+
+  .situation__body {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: clamp(20px, 2.4vw, 32px);
+    align-items: center;
+    flex: 1;
+  }
+
+  .situation__art {
+    display: grid;
+    place-items: center;
+    inline-size: 156px;
+    block-size: 156px;
+    border-radius: 50%;
+    background: var(--sky-100);
+  }
+
+  .situation__text {
+    display: flex;
+    flex-direction: column;
+    block-size: 100%;
+  }
+
+  .situation__lead {
+    margin-block-start: 12px;
+    color: var(--muted);
+    font-size: 17px;
+  }
+
+  .situation__fact {
+    margin-block-start: 12px;
+    padding-inline-start: 12px;
+    border-inline-start: 3px solid var(--sky-200);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.45;
+  }
+
+  .situation__link {
+    align-self: flex-start;
+    margin-block-start: auto;
+    padding-block-start: 20px;
+    font-size: 17px;
+  }
+
+  @media (max-width: 1023px) {
+    .cards {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 559px) {
+    .situation__body {
+      grid-template-columns: 1fr;
+      align-items: start;
+    }
+
+    .situation__art {
+      inline-size: 112px;
+      block-size: 112px;
+    }
+
+    .situation__art svg {
+      inline-size: 88px;
+      block-size: 88px;
+    }
+  }
+</style>

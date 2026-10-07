@@ -1,0 +1,50 @@
+---
+// Смуга-застереження одразу під першим блоком. Обов’язкова, не прибирати.
+import Icon from './Icon.astro';
+---
+
+<aside class="disclaimer" aria-label="Важливе застереження">
+  <div class="container disclaimer__inner">
+    <span class="disclaimer__icon"><Icon name="info" size={22} /></span>
+    <p>
+      <strong>Ми — приватний сервіс.</strong> Не державний орган, не Міжнародний реєстр збитків, не Рада
+      Європи і не Дія. Заяву до Реєстру можна подати{' '}
+      <a href="#samostiino">самостійно і безкоштовно</a>.
+    </p>
+  </div>
+</aside>
+
+<style>
+  .disclaimer {
+    background: var(--yellow-soft);
+    border-block: 1px solid #f3dc8f;
+    color: #3d2f05;
+  }
+
+  .disclaimer__inner {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding-block: 16px;
+    font-size: 16px;
+    line-height: 1.45;
+  }
+
+  .disclaimer__icon {
+    flex: none;
+    margin-block-start: 1px;
+    color: #9a6f00;
+  }
+
+  .disclaimer a {
+    color: inherit;
+    font-weight: 700;
+  }
+
+  @media (min-width: 1024px) {
+    .disclaimer__inner {
+      align-items: center;
+      font-size: 17px;
+    }
+  }
+</style>

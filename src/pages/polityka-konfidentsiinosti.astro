@@ -1,0 +1,40 @@
+---
+// ЗАГЛУШКА на один екран, щоб посилання біля галочки згоди не вело в нікуди.
+// Справжній текст політики — етап 2: потрібні реквізити виконавця (володільця
+// персональних даних) і схема обробки заявок.
+import Base from '../layouts/Base.astro';
+import Stub from '../components/Stub.astro';
+import { site } from '../data/site';
+---
+
+<Base
+  title="Політика конфіденційності — чернетка"
+  description="Сторінка політики конфіденційності готується."
+>
+  <section class="section">
+    <div class="container policy">
+      <p class="eyebrow"><span>Сторінка готується</span></p>
+      <h1>Політика конфіденційності</h1>
+      <p>
+        <Stub value="[текст політики — буде додано до запуску сайту]" />
+      </p>
+      <p>
+        Володілець персональних даних:{' '}<Stub value={site.executor.legalName} />
+      </p>
+      <p>Зараз форма на сайті працює в демонстраційному режимі: дані нікуди не надсилаються і не зберігаються.</p>
+      <p><a class="arrow-link" href="/">На головну</a></p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .policy {
+    display: grid;
+    gap: 20px;
+    max-inline-size: 760px;
+  }
+
+  h1 {
+    font-size: clamp(30px, 4vw, 44px);
+  }
+</style>

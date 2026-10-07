@@ -1,0 +1,124 @@
+---
+import Logo from './Logo.astro';
+import Stub from './Stub.astro';
+import { site, nav } from '../data/site';
+
+const { executor, contacts } = site;
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <Logo />
+
+      <p class="footer__disclaimer">
+        Незалежний приватний сервіс. Не є державним органом, представником Міжнародного реєстру збитків,
+        Ради Європи чи Дії. Подання заяви до Реєстру безоплатне — оплачуються лише наші послуги супроводу.
+        Внесення заяви до Реєстру не гарантує виплату компенсації.
+      </p>
+
+      <nav aria-label="Меню в підвалі">
+        <ul class="footer__nav">
+          {
+            nav.map((item) => (
+              <li>
+                <a href={item.href}>{item.label}</a>
+              </li>
+            ))
+          }
+          <li><a href={site.links.privacy}>Політика конфіденційності</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="footer__bottom">
+      <p class="footer__legal">
+        <Stub value={executor.legalName} />
+        <Stub value={executor.code} />
+        <Stub value={executor.address} />
+      </p>
+      <p class="footer__legal">
+        <Stub value={contacts.phone} />
+        <Stub value={contacts.email} />
+        <Stub value={contacts.telegram} />
+      </p>
+      <p class="footer__copy">© {year} {site.name}</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding-block: 40px 32px;
+    border-block-start: 1px solid var(--line);
+    background: var(--white);
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .footer__top {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 24px clamp(24px, 4vw, 48px);
+    align-items: center;
+  }
+
+  .footer__disclaimer {
+    padding-inline-start: clamp(16px, 3vw, 32px);
+    border-inline-start: 1px solid var(--line);
+    max-inline-size: 64ch;
+  }
+
+  .footer__nav {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 8px 28px;
+    padding-inline-start: clamp(16px, 3vw, 32px);
+    border-inline-start: 1px solid var(--line);
+  }
+
+  .footer__nav a {
+    color: var(--ink);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .footer__nav a:hover {
+    color: var(--blue);
+  }
+
+  .footer__bottom {
+    display: grid;
+    gap: 10px;
+    margin-block-start: 32px;
+    padding-block-start: 24px;
+    border-block-start: 1px solid var(--line);
+  }
+
+  .footer__legal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+  }
+
+  @media (max-width: 1023px) {
+    .footer__top {
+      grid-template-columns: 1fr;
+      align-items: start;
+    }
+
+    .footer__disclaimer,
+    .footer__nav {
+      padding-inline-start: 0;
+      border-inline-start: 0;
+    }
+
+    .footer__nav {
+      grid-template-columns: 1fr;
+      gap: 12px;
+      font-size: 16px;
+    }
+  }
+</style>

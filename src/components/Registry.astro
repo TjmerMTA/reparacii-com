@@ -1,0 +1,156 @@
+---
+// Блок про Реєстр. Логотипів Ради Європи та RD4U тут немає навмисно:
+// їх не дозволено використовувати в комерційних цілях. Лише текст і посилання.
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+---
+
+<section class="section" id="reiestr" aria-labelledby="reiestr-title">
+  <div class="container registry">
+    <div class="registry__aside" data-reveal>
+      <p class="eyebrow"><span>Міжнародний реєстр збитків</span><span>Рада Європи</span></p>
+      <h2 id="reiestr-title">Що таке <span class="accent">Міжнародний реєстр збитків?</span></h2>
+
+      <div class="registry__source">
+        <p>
+          Реєстр діє при Раді Європи. Ми з ним не пов’язані, не представляємо його і не використовуємо
+          його символіку.
+        </p>
+        <p>
+          Офіційна інформація — лише на сайті Реєстру:{' '}
+          <a href={site.links.rd4u} target="_blank" rel="noopener noreferrer">{site.links.rd4uLabel}</a>
+        </p>
+      </div>
+    </div>
+
+    <div class="registry__body" data-reveal>
+      <p>
+        <strong>Міжнародний Реєстр збитків (RD4U)</strong> — перший етап міжнародного механізму компенсації
+        за збитки, втрати та шкоду, завдані агресією Російської Федерації проти України з 24 лютого 2022
+        року.
+      </p>
+      <p>
+        Подати заяву можуть фізичні та юридичні особи, а також держава Україна, зокрема органи державної
+        влади та місцевого самоврядування.
+      </p>
+      <p>
+        Заяви перевіряються на відповідність правилам. Ті, що відповідають вимогам, вносяться до Реєстру
+        для подальшого розгляду в межах компенсаційного механізму.
+      </p>
+      <p>
+        Реєстр не є судом, трибуналом, компенсаційною комісією чи компенсаційним фондом і виплат не
+        призначає. Компенсаційну комісію ще не сформовано.
+      </p>
+
+      <a class="registry__official" href={site.links.rd4u} target="_blank" rel="noopener noreferrer">
+        <span>Офіційний сайт — <u>{site.links.rd4uLabel}</u></span>
+        <Icon name="external" size={20} />
+        <span class="visually-hidden">(відкриється в новій вкладці)</span>
+      </a>
+
+      <p class="registry__warning">
+        <span class="registry__warning-icon"><Icon name="alert" size={20} /></span>
+        <span>
+          Внесення заяви до Реєстру не гарантує виплату компенсації. Суми та строки виплат наразі
+          невідомі.
+        </span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .registry {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: clamp(32px, 6vw, 88px);
+    align-items: start;
+  }
+
+  .registry__source {
+    display: grid;
+    gap: 10px;
+    margin-block-start: 32px;
+    padding: 20px 24px;
+    border: 1px solid var(--line);
+    border-inline-start: 4px solid var(--blue);
+    border-radius: var(--radius-sm);
+    background: var(--sky-50);
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .registry__source a {
+    font-weight: 700;
+  }
+
+  .registry__body {
+    display: grid;
+    gap: 18px;
+    font-size: 17px;
+  }
+
+  .registry__body strong {
+    color: var(--navy);
+  }
+
+  .registry__official {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-block-start: 8px;
+    padding: 16px 24px;
+    border: 1.5px solid var(--sky-200);
+    border-radius: var(--radius-sm);
+    background: var(--sky-100);
+    color: var(--blue);
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    transition:
+      border-color 0.3s ease,
+      background-color 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  .registry__official:hover {
+    border-color: var(--blue);
+    background: var(--white);
+    transform: translateY(-2px);
+  }
+
+  .registry__warning {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 20px;
+    border-radius: var(--radius-sm);
+    background: var(--yellow-soft);
+    color: #3d2f05;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.45;
+  }
+
+  .registry__warning-icon {
+    display: grid;
+    place-items: center;
+    flex: none;
+    inline-size: 32px;
+    block-size: 32px;
+    border-radius: 50%;
+    background: var(--yellow);
+    color: var(--white);
+  }
+
+  .registry__warning-icon :global(svg) {
+    stroke-width: 2.6;
+  }
+
+  @media (max-width: 1023px) {
+    .registry {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

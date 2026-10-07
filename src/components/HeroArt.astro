@@ -1,0 +1,82 @@
+---
+// Нейтральна ілюстрація-заглушка для першого екрана: робочий стіл, ноутбук
+// з абстрактною формою, папери. Намальована з нуля; інтерфейсу Дії, державних
+// знаків і чужих логотипів тут немає навмисно.
+// TODO: замінити на власне фото клієнта (без екрана Дії в кадрі).
+---
+
+<svg
+  class="art"
+  viewBox="0 0 800 600"
+  preserveAspectRatio="xMidYMid slice"
+  role="img"
+  aria-label="Ілюстрація: робочий стіл із ноутбуком і документами"
+>
+  <defs>
+    <linearGradient id="art-wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#edf4fe"></stop>
+      <stop offset="1" stop-color="#dfeafb"></stop>
+    </linearGradient>
+    <linearGradient id="art-desk" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#cddcf3"></stop>
+      <stop offset="1" stop-color="#bccfee"></stop>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="600" fill="url(#art-wall)"></rect>
+
+  <!-- вікно -->
+  <rect x="500" y="36" width="250" height="250" rx="16" fill="#f8fbff"></rect>
+  <path d="M625 36v250M500 161h250" stroke="#d6e4f8" stroke-width="6"></path>
+  <circle cx="690" cy="96" r="26" fill="#ffe9a6"></circle>
+
+  <!-- полиця з рослиною -->
+  <rect x="250" y="150" width="190" height="10" rx="5" fill="#c3d5ef"></rect>
+  <path d="M312 150v-34h44v34z" fill="#fff"></path>
+  <path d="M334 116c-2-22-18-34-32-36 0 18 10 32 32 36ZM334 116c2-26 20-38 34-40 0 20-12 36-34 40ZM334 116c-1-18 0-34 2-46" fill="none" stroke="#5aa27c" stroke-width="5" stroke-linecap="round"></path>
+  <rect x="380" y="112" width="12" height="38" rx="3" fill="#1463e9"></rect>
+  <rect x="394" y="104" width="12" height="46" rx="3" fill="#9db8e4"></rect>
+  <rect x="408" y="118" width="12" height="32" rx="3" fill="#f7b500"></rect>
+
+  <!-- стіл -->
+  <rect y="452" width="800" height="148" fill="url(#art-desk)"></rect>
+  <rect y="452" width="800" height="8" fill="#b3c8ea"></rect>
+
+  <!-- ноутбук -->
+  <rect x="300" y="208" width="372" height="244" rx="16" fill="#16305f"></rect>
+  <rect x="314" y="222" width="344" height="210" rx="6" fill="#fff"></rect>
+  <rect x="314" y="222" width="72" height="210" fill="#f1f6fe"></rect>
+  <rect x="328" y="242" width="28" height="28" rx="8" fill="#1463e9"></rect>
+  <path d="M328 292h44M328 310h36M328 328h44M328 346h30" stroke="#c5d6f0" stroke-width="6" stroke-linecap="round"></path>
+  <path d="M408 250h120" stroke="#0d1b3e" stroke-width="9" stroke-linecap="round"></path>
+  <rect x="408" y="274" width="226" height="28" rx="6" fill="#f1f6fe" stroke="#d6e4f8" stroke-width="2"></rect>
+  <rect x="408" y="312" width="226" height="28" rx="6" fill="#f1f6fe" stroke="#d6e4f8" stroke-width="2"></rect>
+  <rect x="408" y="350" width="226" height="28" rx="6" fill="#f1f6fe" stroke="#d6e4f8" stroke-width="2"></rect>
+  <path d="M420 288h70M420 326h96M420 364h54" stroke="#b9cbe8" stroke-width="5" stroke-linecap="round"></path>
+  <rect x="408" y="390" width="110" height="28" rx="8" fill="#1463e9"></rect>
+  <path d="M250 452h472l-18 20H268z" fill="#a9bfe3"></path>
+  <rect x="440" y="456" width="92" height="6" rx="3" fill="#8fa9d4"></rect>
+
+  <!-- папери -->
+  <g transform="rotate(-7 180 500)">
+    <rect x="96" y="446" width="170" height="118" rx="6" fill="#fff"></rect>
+    <path d="M114 470h96M114 490h134M114 510h120M114 530h70" stroke="#c9d8f0" stroke-width="6" stroke-linecap="round"></path>
+  </g>
+  <g transform="rotate(5 190 505)">
+    <rect x="118" y="462" width="170" height="118" rx="6" fill="#fff" stroke="#e1eaf8" stroke-width="2"></rect>
+    <path d="M136 486h80" stroke="#1463e9" stroke-width="7" stroke-linecap="round"></path>
+    <path d="M136 508h132M136 528h112M136 548h64" stroke="#c9d8f0" stroke-width="6" stroke-linecap="round"></path>
+  </g>
+
+  <!-- горнятко -->
+  <path d="M706 404h54v40a16 16 0 0 1-16 16h-22a16 16 0 0 1-16-16z" fill="#fff"></path>
+  <path d="M760 416h8a10 10 0 0 1 0 20h-8" fill="none" stroke="#fff" stroke-width="7"></path>
+</svg>
+
+<style>
+  .art {
+    display: block;
+    inline-size: 100%;
+    block-size: 100%;
+  }
+</style>

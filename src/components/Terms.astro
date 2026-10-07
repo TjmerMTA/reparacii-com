@@ -1,0 +1,164 @@
+---
+// «Скільки коштує і хто надає послугу». У макеті цього блока немає — доданий,
+// бо виконавець і ціна мають бути названі на сторінці. Усі дані — із
+// src/data/site.ts; поки там заглушки, вони підсвічені.
+import Stub from './Stub.astro';
+import { site } from '../data/site';
+
+const { executor, contacts, prices } = site;
+---
+
+<section class="section" id="tsiny" aria-labelledby="tsiny-title">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow"><span>Умови та вартість</span></p>
+      <h2 id="tsiny-title">Скільки коштує <span class="accent">і&nbsp;хто надає послугу</span></h2>
+      <p class="lead">Вартість називаємо до початку роботи. Оплачується наш супровід — саме подання заяви до Реєстру безкоштовне.</p>
+    </div>
+
+    <div class="terms">
+      <div class="card card--hover terms__card" data-reveal>
+        <h3>Вартість</h3>
+        <ul class="terms__prices">
+          {
+            prices.map((item) => (
+              <li>
+                <div>
+                  <p class="terms__title">{item.title}</p>
+                  <p class="terms__note">
+                    <Stub value={item.note} />
+                  </p>
+                </div>
+                <p class="terms__price">
+                  <Stub value={item.price} />
+                </p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="card card--hover terms__card" data-reveal>
+        <h3>Хто надає послугу</h3>
+        <dl class="terms__list">
+          <div>
+            <dt>Виконавець</dt>
+            <dd><Stub value={executor.legalName} /></dd>
+          </div>
+          <div>
+            <dt>Код</dt>
+            <dd><Stub value={executor.code} /></dd>
+          </div>
+          <div>
+            <dt>Адреса</dt>
+            <dd><Stub value={executor.address} /></dd>
+          </div>
+          <div>
+            <dt>Телефон</dt>
+            <dd><Stub value={contacts.phone} /></dd>
+          </div>
+          <div>
+            <dt>E-mail</dt>
+            <dd><Stub value={contacts.email} /></dd>
+          </div>
+          <div>
+            <dt>Години роботи</dt>
+            <dd><Stub value={contacts.hours} /></dd>
+          </div>
+        </dl>
+        <p class="terms__private">Приватний сервіс. Не державний орган і не представник Реєстру.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .terms {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .terms__card {
+    display: flex;
+    flex-direction: column;
+    padding: clamp(20px, 2.6vw, 32px);
+  }
+
+  .terms__prices,
+  .terms__list {
+    display: grid;
+    margin-block-start: 12px;
+  }
+
+  .terms__prices li,
+  .terms__list div {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px 24px;
+    padding-block: 16px;
+    border-block-end: 1px solid var(--line);
+  }
+
+  .terms__prices li:last-child {
+    border-block-end: 0;
+  }
+
+  .terms__title {
+    color: var(--navy);
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  .terms__note {
+    margin-block-start: 6px;
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.45;
+  }
+
+  .terms__price {
+    flex: none;
+    color: var(--blue);
+    font-weight: 800;
+    text-align: end;
+  }
+
+  .terms__list dt {
+    flex: none;
+    color: var(--muted);
+    font-size: 16px;
+  }
+
+  .terms__list dd {
+    color: var(--navy);
+    font-weight: 600;
+    text-align: end;
+  }
+
+  .terms__private {
+    margin-block-start: auto;
+    padding-block-start: 20px;
+    color: var(--muted);
+    font-size: 15px;
+  }
+
+  @media (max-width: 1023px) {
+    .terms {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 559px) {
+    .terms__prices li,
+    .terms__list div {
+      flex-direction: column;
+    }
+
+    .terms__price,
+    .terms__list dd {
+      text-align: start;
+    }
+  }
+</style>

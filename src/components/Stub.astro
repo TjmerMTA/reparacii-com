@@ -1,0 +1,49 @@
+---
+// Показує значення з src/data/site.ts. Якщо воно ще заглушка ([ ... ]) —
+// підсвічує його, щоб на показі було видно, що дані не справжні.
+import { isStub } from '../data/site';
+
+interface Props {
+  value: string;
+}
+
+const { value } = Astro.props;
+const stub = isStub(value);
+---
+
+{
+  stub ? (
+    <span class="stub" title="Заглушка: замінити в src/data/site.ts">
+      <span class="stub__tag">заглушка</span>
+      {value}
+    </span>
+  ) : (
+    value
+  )
+}
+
+<style>
+  .stub {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    padding: 1px 8px;
+    border: 1.5px dashed #d9a400;
+    border-radius: 8px;
+    background: var(--yellow-soft);
+    color: var(--yellow-ink);
+    font-weight: 600;
+  }
+
+  .stub__tag {
+    padding: 1px 6px;
+    border-radius: 5px;
+    background: var(--yellow);
+    color: var(--navy);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+</style>

@@ -1,0 +1,97 @@
+---
+import Icon from './Icon.astro';
+
+const items = [
+  { icon: 'chat', text: ['Безкоштовна', 'консультація'] },
+  { icon: 'shield', text: ['Прозорі умови', 'роботи'] },
+  { icon: 'doc', text: ['Допомога', 'з документами'] },
+] as const;
+---
+
+<section class="features" aria-label="Як ми працюємо">
+  <ul class="container features__list">
+    {
+      items.map((item) => (
+        <li class="features__item">
+          <span class="features__icon">
+            <Icon name={item.icon} size={28} />
+          </span>
+          <span class="features__text">
+            {item.text[0]} <span>{item.text[1]}</span>
+          </span>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  .features {
+    background: var(--white);
+    border-block-end: 1px solid var(--line);
+  }
+
+  .features__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding-block: 32px;
+  }
+
+  .features__item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-inline: clamp(16px, 3vw, 48px);
+    color: var(--navy);
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .features__item:first-child {
+    padding-inline-start: 0;
+  }
+
+  .features__item + .features__item {
+    border-inline-start: 1px solid var(--line);
+  }
+
+  .features__icon {
+    display: grid;
+    place-items: center;
+    flex: none;
+    inline-size: 64px;
+    block-size: 64px;
+    border-radius: 50%;
+    background: var(--sky-100);
+    color: var(--blue);
+  }
+
+  .features__text span {
+    display: block;
+  }
+
+  @media (max-width: 767px) {
+    .features__list {
+      grid-template-columns: 1fr;
+      padding-block: 16px;
+    }
+
+    .features__item {
+      padding: 14px 0;
+    }
+
+    .features__item + .features__item {
+      border-inline-start: 0;
+      border-block-start: 1px solid var(--line);
+    }
+
+    .features__icon {
+      inline-size: 52px;
+      block-size: 52px;
+    }
+
+    .features__text span {
+      display: inline;
+    }
+  }
+</style>

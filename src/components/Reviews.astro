@@ -1,0 +1,78 @@
+---
+// Блок відгуків з макета. Поки в src/data/site.ts немає реальних відгуків із
+// письмовою згодою клієнтів — блок не потрапляє в HTML узагалі (ні карток-
+// заглушок, ні пункту меню). Вигадані відгуки публікувати не можна.
+import { site, hasReviews } from '../data/site';
+---
+
+{
+  hasReviews && (
+    <section class="section section--tint" id="vidhuky" aria-labelledby="vidhuky-title">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">
+            <span>Відгуки клієнтів</span>
+          </p>
+          <h2 id="vidhuky-title">
+            Відгуки <span class="accent">клієнтів</span>
+          </h2>
+          <p class="lead">Публікуємо лише за згодою клієнтів.</p>
+        </div>
+        <ul class="reviews">
+          {site.reviews.map((review) => (
+            <li class="card card--hover review" data-reveal>
+              <span class="review__quote" aria-hidden="true">
+                “
+              </span>
+              <blockquote>
+                <p>{review.text}</p>
+                <footer>{review.author}</footer>
+              </blockquote>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .reviews {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .review {
+    display: flex;
+    gap: 20px;
+    padding: clamp(20px, 2.6vw, 32px);
+  }
+
+  .review__quote {
+    flex: none;
+    color: var(--sky-200);
+    font-size: 72px;
+    font-weight: 800;
+    line-height: 0.9;
+  }
+
+  .review blockquote {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 0;
+  }
+
+  .review footer {
+    margin-block-start: auto;
+    color: var(--navy);
+    font-weight: 700;
+  }
+
+  @media (max-width: 1023px) {
+    .reviews {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

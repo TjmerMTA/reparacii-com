@@ -1,0 +1,140 @@
+---
+// Обов’язковий блок: заяву можна подати самостійно і безкоштовно.
+// Факти — з розбору (FAQ Реєстру, сторінки Дії). Не прибирати і не ховати вниз.
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+
+const facts = [
+  'Заява подається лише в електронному вигляді — через портал Дія.',
+  'За подання заяви плата не стягується.',
+  'Крайнього строку подання наразі немає — поспішати не потрібно.',
+];
+---
+
+<section class="section section--tint" id="samostiino" aria-labelledby="samostiino-title">
+  <div class="container self">
+    <div class="self__text" data-reveal>
+      <p class="eyebrow"><span>Чесно про головне</span></p>
+      <h2 id="samostiino-title">Можна подати самостійно <span class="accent">і&nbsp;безкоштовно</span></h2>
+      <p class="lead self__lead">
+        Наш супровід — платна послуга для тих, кому складно самостійно розібратися з категоріями,
+        документами та доказами. Якщо впораєтеся самі — подавайте самі, це нормально.
+      </p>
+      <ul class="self__facts">
+        {
+          facts.map((fact) => (
+            <li>
+              <Icon name="check" size={22} />
+              <span>{fact}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <ul class="self__cards">
+      <li class="card card--hover self__card" data-reveal>
+        <h3>Подати заяву в Дії</h3>
+        <p>Державний портал, розділ «Репарації: міжнародний Реєстр збитків». Безкоштовно.</p>
+        <a class="arrow-link" href={site.links.diia} target="_blank" rel="noopener noreferrer">
+          Перейти на diia.gov.ua
+          <Icon name="external" size={20} />
+          <span class="visually-hidden">(відкриється в новій вкладці)</span>
+        </a>
+      </li>
+      <li class="card card--hover self__card" data-reveal>
+        <h3>Безоплатна правова допомога</h3>
+        <p>Державна система БПД консультує безкоштовно. Дзвінки в межах України безоплатні.</p>
+        <a class="self__phone" href={site.freeLegalAidPhone.href}>
+          <Icon name="phone" size={24} />
+          {site.freeLegalAidPhone.display}
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  .self {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: clamp(32px, 5vw, 72px);
+    align-items: center;
+  }
+
+  .self__lead {
+    margin-block-start: 16px;
+  }
+
+  .self__facts {
+    display: grid;
+    gap: 12px;
+    margin-block-start: 28px;
+    color: var(--navy);
+    font-size: 17px;
+    font-weight: 600;
+  }
+
+  .self__facts li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .self__facts :global(svg) {
+    flex: none;
+    margin-block-start: 2px;
+    color: var(--blue);
+  }
+
+  .self__cards {
+    display: grid;
+    grid-auto-rows: 1fr;
+    gap: 20px;
+  }
+
+  .self__card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: clamp(20px, 2.4vw, 28px);
+  }
+
+  .self__card p {
+    color: var(--muted);
+    font-size: 16px;
+  }
+
+  .self__card .arrow-link,
+  .self__phone {
+    margin-block-start: auto;
+    padding-block-start: 8px;
+  }
+
+  .self__phone {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--navy);
+    font-size: clamp(24px, 2.6vw, 30px);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .self__phone:hover {
+    color: var(--blue);
+  }
+
+  .self__phone :global(svg) {
+    color: var(--blue);
+  }
+
+  @media (max-width: 1023px) {
+    .self {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
