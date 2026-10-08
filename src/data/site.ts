@@ -27,8 +27,8 @@ export interface Price {
 export const site = {
   name: 'Центр репараційної допомоги',
   tagline: 'приватний сервіс',
-  domain: 'reparatsii.com',
-  url: 'https://reparatsii.com',
+  domain: 'reparacii.com',
+  url: 'https://reparacii.com',
 
   // Поки true — на кожній сторінці стоїть <meta name="robots" content="noindex, nofollow">.
   // Знімати лише після реальних реквізитів, цін, політики та робочої форми.

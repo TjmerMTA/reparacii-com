@@ -9,3 +9,6 @@ npm-debug.log*
 
 # Знімки екрана — результат `npm run shots`, перезбираються.
 shots/
+
+# викладка
+.gh-pages/
